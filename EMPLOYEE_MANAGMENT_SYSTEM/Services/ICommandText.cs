@@ -9,6 +9,7 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Services
     {
         string GetEmployees { get; }
         string GetEmployeeById { get; }
+        string GetEmployeeByName { get; }
         string AddEmployee { get; }
         string UpdateEmployee { get; }
         string RemoveEmployee { get; }

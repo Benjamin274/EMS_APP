@@ -6,6 +6,7 @@ using Dapper;
 using System.Linq;
 using System.Threading.Tasks;
 using EMPLOYEE_MANAGMENT_SYSTEM.Services;
+using System.Data;
 
 namespace EMS_APP.Services
 {
@@ -85,6 +86,15 @@ namespace EMS_APP.Services
                 return query;
             });
 
+        }
+
+        public async  Task<IEnumerable<Employee>> GetByName(string name)
+        {
+            return await WithConnection(async conn =>
+            {
+                var query = await conn.QueryAsync<Employee>(_commandText.GetEmployeeByName,new {Name = name },commandType:CommandType.StoredProcedure);
+                return query;
+            });
         }
     }
 }

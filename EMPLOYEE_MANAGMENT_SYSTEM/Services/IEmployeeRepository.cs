@@ -8,11 +8,13 @@ namespace EMS_APP.Services
 {
     public interface IEmployeeRepository
     {
+        Task<IEnumerable<Employee>> GetAllEmployees();
         ValueTask<Employee> GetById(int id);
+        Task<IEnumerable<Employee>> GetByName(string name);
         Task AddEmployee(Employee entity);
         Task UpdateEmployee(Employee entity, int id);
         Task RemoveEmployee(int id);
-        Task<IEnumerable<Employee>> GetAllEmployees();
+
 
         //Departement Operations
         Task<IEnumerable<Department>> GetAllDepartments();

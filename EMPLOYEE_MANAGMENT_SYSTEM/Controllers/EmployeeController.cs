@@ -31,6 +31,13 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Controllers
             var product = await _employeeRepository.GetById(id);
             return Ok(product);
         }
+        [HttpGet]
+        [Route("search/{name}")]
+        public async Task<ActionResult<Employee>> GetByName(string name)
+        {
+            var product = await _employeeRepository.GetByName(name);
+            return Ok(product);
+        }
         [HttpPost]
         public async Task<ActionResult> AddProduct(Employee entity)
         {

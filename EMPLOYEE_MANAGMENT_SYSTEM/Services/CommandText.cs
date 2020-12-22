@@ -18,8 +18,8 @@ namespace EMS_APP.Services
 
         //Department Query
         public string GetDepartments => "Select * From Department";
-        public string AddDepartment => "Insert Into  Department (Name) Values " +
-            "(@Name)";
+        public string AddDepartment => "Insert Into  Department (Name) Values (@Name)";
 
+        public string GetEmployeeByName => "searchEmployee";
     }
 }
