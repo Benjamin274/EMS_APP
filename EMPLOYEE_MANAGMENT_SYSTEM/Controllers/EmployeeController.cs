@@ -24,6 +24,13 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Controllers
         {
             return Ok(await _employeeRepository.GetAllEmployees());
         }
+
+        [HttpPost]
+        public async Task<ActionResult> AddProduct(Employee entity)
+        {
+            await _employeeRepository.AddEmployee(entity);
+            return Ok(entity);
+        }
         [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<Employee>> GetById(int id)
@@ -38,12 +45,7 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Controllers
             var product = await _employeeRepository.GetByName(name);
             return Ok(product);
         }
-        [HttpPost]
-        public async Task<ActionResult> AddProduct(Employee entity)
-        {
-            await _employeeRepository.AddEmployee(entity);
-            return Ok(entity);
-        }
+        
         [HttpPut("{id}")]
         public async Task<ActionResult<Employee>> Update(Employee entity, int id)
         {

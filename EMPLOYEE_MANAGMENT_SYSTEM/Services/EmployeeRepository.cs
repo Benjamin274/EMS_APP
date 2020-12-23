@@ -44,7 +44,10 @@ namespace EMS_APP.Services
             await WithConnection(async conn =>
             {
                 await conn.ExecuteAsync(_commandText.AddEmployee,
-                    new { Name = entity.Name, Salary = entity.Salary, Gender = entity.Gender, DepartmentId = entity.DepartmentId });
+                    new { Name = entity.Name, Salary = entity.Salary, Gender = entity.Gender, DepartmentId = entity.DepartmentId,
+                    JobTitle = entity.JobTitle,
+                        Password = entity.Password
+                    });
             });
 
         }
@@ -53,7 +56,11 @@ namespace EMS_APP.Services
             await WithConnection(async conn =>
             {
                 await conn.ExecuteAsync(_commandText.UpdateEmployee,
-                    new { Name = entity.Name, Salary = entity.Salary , Gender = entity.Gender ,DepartmentId = entity.DepartmentId, Id = id });
+                    new { Name = entity.Name, Salary = entity.Salary , Gender = entity.Gender ,DepartmentId = entity.DepartmentId, Id = id
+                    ,
+                        JobTitle = entity.JobTitle,
+                        Password = entity.Password
+                    });
             });
 
         }
