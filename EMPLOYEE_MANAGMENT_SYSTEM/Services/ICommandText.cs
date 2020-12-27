@@ -11,6 +11,7 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Services
         string GetEmployeeById { get; }
         string GetEmployeeByName { get; }
         string AddEmployee { get; }
+        string Login { get; }
         string UpdateEmployee { get; }
         string RemoveEmployee { get; }
 

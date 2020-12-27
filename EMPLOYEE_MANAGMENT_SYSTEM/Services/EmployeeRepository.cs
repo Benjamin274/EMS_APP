@@ -19,6 +19,8 @@ namespace EMS_APP.Services
             _commandText = commandText;
 
         }
+
+        //get All Employees with department name 
         public async Task<IEnumerable<Employee>> GetAllEmployees()
         {
 
@@ -29,42 +31,62 @@ namespace EMS_APP.Services
             });
 
         }
+
+        //get an employee by Id
+
         public async ValueTask<Employee> GetById(int id)
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryFirstOrDefaultAsync<Employee>(_commandText.GetEmployeeById, new { Id = id });
+                var query = await conn.QueryFirstOrDefaultAsync<Employee>(
+                    _commandText.GetEmployeeById, 
+                    new { Id = id });
                 return query;
             });
 
         }
 
-        public async Task AddEmployee(Employee entity)
+        //Add An Employee
+            public async Task AddEmployee(Employee entity)
         {
             await WithConnection(async conn =>
             {
                 await conn.ExecuteAsync(_commandText.AddEmployee,
-                    new { Name = entity.Name, Salary = entity.Salary, Gender = entity.Gender, DepartmentId = entity.DepartmentId,
-                    JobTitle = entity.JobTitle,
+                    new { 
+                        Name = entity.Name, 
+                        Salary = entity.Salary,
+                        Gender = entity.Gender,
+                        DepartmentId = entity.DepartmentId,
+                        JobTitle = entity.JobTitle,
+                        Email = entity.Email,
                         Password = entity.Password
                     });
             });
 
         }
+
+        //Update Employee Information
         public async Task UpdateEmployee(Employee entity, int id)
         {
             await WithConnection(async conn =>
             {
                 await conn.ExecuteAsync(_commandText.UpdateEmployee,
-                    new { Name = entity.Name, Salary = entity.Salary , Gender = entity.Gender ,DepartmentId = entity.DepartmentId, Id = id
-                    ,
+                    new {
+                        Id = id,
+                        Name = entity.Name,
+                        Salary = entity.Salary,
+                        Gender = entity.Gender,
+                        DepartmentId = entity.DepartmentId,
                         JobTitle = entity.JobTitle,
+                        Email = entity.Email,
                         Password = entity.Password
                     });
             });
 
         }
 
+
+        //Remove employee
         public async Task RemoveEmployee(int id)
         {
 
@@ -75,14 +97,8 @@ namespace EMS_APP.Services
 
         }
 
-        public async Task AddDepartement(Department entity)
-        {
-            await WithConnection(async conn =>
-            {
-                await conn.ExecuteAsync(_commandText.AddDepartment,
-                    new { Name = entity.Name});
-            });
-        }
+
+        //Get All departments from database
 
         public async Task<IEnumerable<Department>> GetAllDepartments()
         {
@@ -95,12 +111,33 @@ namespace EMS_APP.Services
 
         }
 
+        //Add Department
+
+        public async Task AddDepartement(Department entity)
+        {
+            await WithConnection(async conn =>
+            {
+                await conn.ExecuteAsync(_commandText.AddDepartment,
+                    new { Name = entity.Name});
+            });
+        }
+
+
         public async  Task<IEnumerable<Employee>> GetByName(string name)
         {
             return await WithConnection(async conn =>
             {
                 var query = await conn.QueryAsync<Employee>(_commandText.GetEmployeeByName,new {Name = name },commandType:CommandType.StoredProcedure);
                 return query;
+            });
+        }
+
+        //returns an Employee with the given entity from 
+        public async ValueTask<Employee> Login(Employee entity)
+        {
+            return await WithConnection(async conn =>
+            {
+                return await conn.QueryFirstOrDefaultAsync<Employee>(_commandText.Login, new { Email = entity.Email, Password = entity.Password });
             });
         }
     }

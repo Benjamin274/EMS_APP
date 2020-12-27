@@ -20,7 +20,7 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Controllers
             _employeeRepository = _employeeRepo;
         }
         [HttpGet]
-        public async Task<ActionResult<Employee>> Get()
+        public async Task<ActionResult<Employee>> GetAll()
         {
             return Ok(await _employeeRepository.GetAllEmployees());
         }
@@ -31,19 +31,21 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Controllers
             await _employeeRepository.AddEmployee(entity);
             return Ok(entity);
         }
+        
         [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<Employee>> GetById(int id)
         {
-            var product = await _employeeRepository.GetById(id);
-            return Ok(product);
+            var employee = await _employeeRepository.GetById(id);
+            return Ok(employee);
         }
         [HttpGet]
+
         [Route("search/{name}")]
         public async Task<ActionResult<Employee>> GetByName(string name)
         {
-            var product = await _employeeRepository.GetByName(name);
-            return Ok(product);
+            var employee = await _employeeRepository.GetByName(name);
+            return Ok(employee);
         }
         
         [HttpPut("{id}")]
@@ -57,6 +59,13 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Controllers
         {
             await _employeeRepository.RemoveEmployee(id);
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<ActionResult<Employee>> Login(Employee entity)
+        {
+            return Ok(await _employeeRepository.Login(entity));
         }
 
     }
