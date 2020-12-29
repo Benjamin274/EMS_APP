@@ -52,7 +52,7 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Controllers
         public async Task<ActionResult<Employee>> Update(Employee entity, int id)
         {
             await _employeeRepository.UpdateEmployee(entity, id);
-            return Ok(entity);
+            return Ok();
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)

@@ -110,6 +110,17 @@ namespace EMS_APP.Services
             });
 
         }
+        //Get All departments from database with Managers Joined
+        public async Task<IEnumerable<Department>> GetAllDepartmentsWithManager()
+        {
+
+            return await WithConnection(async conn =>
+            {
+                var query = await conn.QueryAsync<Department>(_commandText.GetDepartmentsWithManagerJoin);
+                return query;
+            });
+
+        }
 
         //Add Department
 
@@ -139,6 +150,19 @@ namespace EMS_APP.Services
             {
                 return await conn.QueryFirstOrDefaultAsync<Employee>(_commandText.Login, new { Email = entity.Email, Password = entity.Password });
             });
+        }
+
+        public async  Task UpdateDepartement(Department entity)
+        {
+            await WithConnection(async conn =>
+            {
+                await conn.ExecuteAsync(_commandText.UpdateDepartment,
+                    new
+                    {
+                        Id = entity.Id,
+                        ManagerId = entity.ManagerId
+                    });
+            }); 
         }
     }
 }

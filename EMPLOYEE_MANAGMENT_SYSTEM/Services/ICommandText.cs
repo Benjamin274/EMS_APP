@@ -14,10 +14,10 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Services
         string Login { get; }
         string UpdateEmployee { get; }
         string RemoveEmployee { get; }
-
-
         //dEPArtment 
         string AddDepartment { get; }
         string GetDepartments { get; }
+        string UpdateDepartment { get; }
+        string GetDepartmentsWithManagerJoin { get; }
     }
 }

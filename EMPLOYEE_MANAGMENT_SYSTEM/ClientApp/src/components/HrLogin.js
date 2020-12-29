@@ -17,7 +17,7 @@ export const HrLogin = () => {
       if(response.status === 200) {
         console.log("SUCCESSS") 
         console.log(response) 
-        window.location.replace("/employee_login");
+        window.location.replace("/admin_page");
         
     }else {
         console.log("SOMETHING WENT WRONG")

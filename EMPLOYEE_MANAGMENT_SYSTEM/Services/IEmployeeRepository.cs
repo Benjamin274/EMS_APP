@@ -19,6 +19,8 @@ namespace EMS_APP.Services
 
         //Departement Operations
         Task<IEnumerable<Department>> GetAllDepartments();
+        Task<IEnumerable<Department>> GetAllDepartmentsWithManager();
         Task AddDepartement(Department entity);
+        Task UpdateDepartement(Department entity);
     }
 }

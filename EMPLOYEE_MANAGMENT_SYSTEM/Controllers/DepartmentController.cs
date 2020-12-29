@@ -31,5 +31,16 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Controllers
         {
             return Ok(await _employeeRepository.GetAllDepartments());
         }
+        [HttpPut]
+        public async Task<ActionResult<Department>> updateDepartment(Department entity)
+        {
+            await _employeeRepository.UpdateDepartement(entity);
+            return Ok(entity);
+        }
+        [HttpGet("managers")]
+        public async Task<ActionResult<Department>> GetAllDepartmentsWithManager()
+        {
+            return Ok(await _employeeRepository.GetAllDepartmentsWithManager());
+        }
     }
 }
