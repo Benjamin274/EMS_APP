@@ -20,14 +20,18 @@ namespace EMS_APP.Services
             "@Email ,Password = @Password Where Id =@Id";
         public string RemoveEmployee => "Delete From Employee Where Id= @Id"; 
 
+        public string GetEmployeeByName => "SearchEmployee";        
+   
+        public string getTeamMembers => "select * from VIEW_Team_Members where DepartmentId = @Id";        
+   
+        public string Login => "Select TOP 1 * From Employee Where Email = @Email and Password = @Password";
+   
         //Department Query
         public string GetDepartments => "Select * From Department";
-        public string GetDepartmentsWithManagerJoin => "Select Department.Id,Department.Name ,ManagerId,Employee.Name as ManagerName   From Department   JOIN Employee On Employee.Id = Department.ManagerId";
+        public string GetDepartmentsWithManagerJoin => "Select Department.Id,Department.Name ,ManagerId,Employee.Name as ManagerName " +
+            "  From Department   JOIN Employee On Employee.Id = Department.ManagerId";
         public string AddDepartment => "Insert Into  Department (Name) Values (@Name)";
         public string UpdateDepartment => "Update Department set ManagerId = @ManagerId Where Id =@Id";
 
-        public string GetEmployeeByName => "searchEmployee";
-
-        public string Login => "Select TOP 1 * From Employee Where Email = @Email and Password = @Password";
-    }
+ }
 }

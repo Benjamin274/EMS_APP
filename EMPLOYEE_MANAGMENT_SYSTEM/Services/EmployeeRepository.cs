@@ -138,17 +138,28 @@ namespace EMS_APP.Services
         {
             return await WithConnection(async conn =>
             {
-                var query = await conn.QueryAsync<Employee>(_commandText.GetEmployeeByName,new {Name = name },commandType:CommandType.StoredProcedure);
+                var query = await conn.QueryAsync<Employee>(_commandText.GetEmployeeByName,new {strFind = name },commandType:CommandType.StoredProcedure);
                 return query;
             });
         }
+        public async  Task<IEnumerable<Employee>> getTeamMembers(int id)
+        {
+            return await WithConnection(async conn =>
+            {
+                var query = await conn.QueryAsync<Employee>(  _commandText.getTeamMembers,new {Id = id });
+                return query;
+            });
+        }
+        
 
         //returns an Employee with the given entity from 
         public async ValueTask<Employee> Login(Employee entity)
         {
             return await WithConnection(async conn =>
             {
-                return await conn.QueryFirstOrDefaultAsync<Employee>(_commandText.Login, new { Email = entity.Email, Password = entity.Password });
+                return await conn.QueryFirstOrDefaultAsync<Employee>(
+                    _commandText.Login, new { Email = entity.Email, 
+                    Password = entity.Password });
             });
         }
 

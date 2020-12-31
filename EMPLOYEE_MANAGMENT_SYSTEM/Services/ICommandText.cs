@@ -10,6 +10,7 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Services
         string GetEmployees { get; }
         string GetEmployeeById { get; }
         string GetEmployeeByName { get; }
+        string getTeamMembers { get; }
         string AddEmployee { get; }
         string Login { get; }
         string UpdateEmployee { get; }

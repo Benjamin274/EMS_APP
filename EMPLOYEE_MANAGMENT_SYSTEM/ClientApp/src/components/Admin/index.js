@@ -1,16 +1,17 @@
-import  React  from "react";
+import React, { useEffect } from "react";
 
-import {AdminNav} from "./AdminNav";
+import { AdminNav } from "./AdminNav";
 
-function Welcome(props) {
-    return <h1>Hello, {props.name}</h1>;
-  }
+export const AdminPage = () => {
+
+  useEffect(() => {
+    console.log('getting' , window.localStorage.getItem('user'))
+  }, []);
   
-  export const Index = () => {
-    return (
-      <div>
-        <AdminNav />
-        </div>
-    );
-  }
-  
+  return (
+    <div>
+      <AdminNav />
+    </div>
+  );
+}
+

@@ -15,6 +15,7 @@ namespace EMS_APP.Models
         public string Password { get; set; }
         public string JobTitle { get; set; }
         public char Gender { get; set; }
+        public int  RoleId { get; set; }
         public double Salary { get; set; }
         public DateTime CreatedAt { get; set; }
     }

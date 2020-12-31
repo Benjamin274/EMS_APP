@@ -39,14 +39,6 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Controllers
             var employee = await _employeeRepository.GetById(id);
             return Ok(employee);
         }
-        [HttpGet]
-
-        [Route("search/{name}")]
-        public async Task<ActionResult<Employee>> GetByName(string name)
-        {
-            var employee = await _employeeRepository.GetByName(name);
-            return Ok(employee);
-        }
         
         [HttpPut("{id}")]
         public async Task<ActionResult<Employee>> Update(Employee entity, int id)
@@ -60,6 +52,20 @@ namespace EMPLOYEE_MANAGMENT_SYSTEM.Controllers
             await _employeeRepository.RemoveEmployee(id);
             return Ok();
         }
+         [HttpGet("team/{id}")]
+        public async Task<ActionResult<Employee>> TeamView(int  id)
+        {
+            var employee = await _employeeRepository.getTeamMembers(id);
+            return Ok(employee);
+        }
+
+        [HttpGet("search/{name}")]
+        public async Task<ActionResult<Employee>> GetByName(string name)
+        {
+            var employee = await _employeeRepository.GetByName(name);
+            return Ok(employee);
+        }
+
 
         [HttpPost]
         [Route("login")]

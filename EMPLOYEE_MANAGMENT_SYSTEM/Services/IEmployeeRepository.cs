@@ -11,6 +11,7 @@ namespace EMS_APP.Services
         Task<IEnumerable<Employee>> GetAllEmployees();
         ValueTask<Employee> GetById(int id);
         Task<IEnumerable<Employee>> GetByName(string name);
+        Task<IEnumerable<Employee>> getTeamMembers(int id);
         ValueTask<Employee> Login(Employee e);
         Task AddEmployee(Employee entity);
         Task UpdateEmployee(Employee entity, int id);

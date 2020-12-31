@@ -4,29 +4,32 @@ import { Form, Button } from "react-bootstrap";
 
 export const HrLogin = () => {
   const [employee, setEmployee] = useState({});
-  const signIn = (event) => {
+  async function signIn(event) {
     event.preventDefault()
-    fetch('api/employee/login',{
+    const response = await fetch('api/employee/login', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
       },
       body: JSON.stringify(employee)
     })
-    .then(response=>{
-      if(response.status === 200) {
-        console.log("SUCCESSS") 
-        console.log(response) 
-        window.location.replace("/admin_page");
-        
-    }else {
-        console.log("SOMETHING WENT WRONG")
-    }
+    if (response) {
+      console.log("SUCCESSS")
+      let data = await response.json();
+      console.log('Data setting',data)
+      window.localStorage.clear()
+      window.localStorage.setItem('user',JSON.stringify(data));
+      if (data.roleId == 1) {
+        window.location.replace("/employee_page");
+      }
+      else
+        {
+          window.location.replace("/admin_page");
+      }
 
-    })
-    .catch(err=>{
-      console.log("Error:",err)
-    })
+    } else {
+      alert("SOMETHING WENT WRONG")
+    }
   }
 
   const set = name => {
@@ -51,7 +54,7 @@ export const HrLogin = () => {
           <Form.Control value={employee.password} onChange={set('password')} type="password" placeholder="Password" />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Submit
+          Login
         </Button>
       </Form>
     </div>
